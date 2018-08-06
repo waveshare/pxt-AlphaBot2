@@ -4,6 +4,8 @@
 	"Dir.turnRight|block": "右转",
 	"Dir.turnLeft|block": "左转",
 	"Dir.stop|block": "停止",
+	"Sensor.Left|block": "左侧",
+	"Sensor.Right|block": "右侧",
 	"AlphaBot2.Infrared|block": "红外传感器 |%index",
 	"AlphaBot2.MotorRun|block": "电机|%index|速度 %speed",
 	"AlphaBot2.Run|block": "%index|速度 %speed",
