@@ -1,14 +1,14 @@
 {
-    "name": "KitiBot",
+    "name": "AlphaBot2",
     "version": "0.0.0",
-    "description": "Extension for waveshare KitiBot",
+    "description": "Extension for waveshare AlphaBot2",
     "license": "MIT",
     "dependencies": {
         "core": "*"
     },
     "files": [
         "README.md",
-        "KitiBot.ts",
+        "AlphaBot2.ts",
         "_locales/zh/AlphaBot2-strings.json"
     ],
     "testFiles": [
