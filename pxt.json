@@ -4,13 +4,12 @@
     "description": "Extension for waveshare KitiBot",
     "license": "MIT",
     "dependencies": {
-        "core": "*",
-        "APA102": "github:waveshare/pxt-apa102#v1.0.0"
+        "core": "*"
     },
     "files": [
         "README.md",
         "KitiBot.ts",
-        "_locales/zh/KitiBot-strings.json"
+        "_locales/zh/AlphaBot2-strings.json"
     ],
     "testFiles": [
         "test.ts"

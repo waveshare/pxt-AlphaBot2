@@ -1,0 +1,18 @@
+{
+	"Dir.forward|block": "前进",
+	"Dir.backward|block": "后退",
+	"Dir.turnRight|block": "右转",
+	"Dir.turnLeft|block": "左转",
+	"Dir.stop|block": "停止",
+	"AlphaBot2.Infrared|block": "红外传感器 |%index",
+	"AlphaBot2.MotorRun|block": "电机|%index|速度 %speed",
+	"AlphaBot2.Run|block": "%index|速度 %speed",
+	"AlphaBot2.RunDelay|block": "%index|速度 %speed|持续%time|秒",
+	"AlphaBot2.Ultrasonic|block": "超声波",
+	"AlphaBot2.SensorCalibrated|block": "循迹传感器校准",
+	"AlphaBot2.readLine|block": "获取线位置",
+	"AlphaBot2.AnalogRead|block": "循迹数值",
+	"AlphaBot2.readCalibrated|block": "循迹校准数值",
+	"AlphaBot2.ReadSensorMax|block": "循迹最大值",
+	"AlphaBot2.ReadSensorMin|block": "循迹最小值"
+}

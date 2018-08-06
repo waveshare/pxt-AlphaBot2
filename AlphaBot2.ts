@@ -1,4 +1,3 @@
-
 /**
  * 使用此文件来定义自定义函数和图形块。
  * 想了解更详细的信息，请前往 https://makecode.microbit.org/blocks/custom
@@ -9,6 +8,13 @@ enum Motors {
     M1 = 0x1,
     //% block="M2"
     M2 = 0x2,
+}
+
+enum Sensor {
+    //% block="Left"
+    Left = 0x1,
+    //% block="Right"
+    Right = 0x2,
 }
 
 enum Dir {
@@ -28,7 +34,7 @@ enum Dir {
  * 自定义图形块
  */
 //% weight=5 color=#0fbc11 icon="\uf113"
-namespace KitiBot {
+namespace AlphaBot2 {
     const PCA9685_ADDRESS = 0x40
     const MODE1 = 0x00
     const MODE2 = 0x01
@@ -119,20 +125,7 @@ namespace KitiBot {
         buf[4] = (off >> 8) & 0xff;
         pins.i2cWriteBuffer(PCA9685_ADDRESS, buf);
     }
-
-	/**
-	 * Servo Execute
-	 * @param degree [0-180] degree of servo; eg: 0, 90, 180
-	*/
-    //% blockId=kitibot_servo block="Servo degree %degree"
-    //% weight=85
-    //% degree.min=0 degree.max=180
-    export function Servo(degree: number): void {
-        let v_us = (degree * 1800 / 180 + 600); // 0.6 ~ 2.4
-        pins.servoSetPulse(AnalogPin.P16, v_us);
-    }
-
-    //% blockId=kitibot_motor_run block="Motor|%index|speed %speed"
+    //% blockId=AlphaBot2_motor_run block="Motor|%index|speed %speed"
     //% speed eg: 150
     //% weight=100
     //% speed.min=-255 speed.max=255
@@ -174,7 +167,7 @@ namespace KitiBot {
 	 * Execute single motors 
 	 * @param speed [-255-255] speed of motor; eg: 150
 	*/
-    //% blockId=kitibot_run block="|%index|speed %speed"
+    //% blockId=AlphaBot2_run block="|%index|speed %speed"
     //% speed eg: 150
     //% weight=95
     //% speed.min=-255 speed.max=255 eg: 150
@@ -209,7 +202,7 @@ namespace KitiBot {
 	 * @param speed [-255-255] speed of motor; eg: 150
 	 * @param time dalay second time; eg: 2
 	*/
-    //% blockId=kitibot_run_delay block="|%index|speed %speed|for %time|sec"
+    //% blockId=AlphaBot2_run_delay block="|%index|speed %speed|for %time|sec"
     //% speed eg: 150
     //% weight=90
     //% speed.min=-255 speed.max=255 eg: 150
@@ -220,7 +213,25 @@ namespace KitiBot {
         Run(Dir.stop, 0);
     }
 
-    //% blockId=kitibot_ultrasonic block="Ultrasonic"
+    //% blockId=AlphaBot2_infrared block="Infrared |%index"
+    //% weight=80
+    export function Infrared(index: Sensor): boolean {
+        let value = true;
+        pins.setPull(DigitalPin.P12, PinPullMode.PullUp);
+        pins.setPull(DigitalPin.P16, PinPullMode.PullUp);
+        if (index == 0x01) {
+            if (pins.digitalReadPin(DigitalPin.P12)) {
+                value = false;
+            }
+        } else {
+            if (pins.digitalReadPin(DigitalPin.P16)) {
+                value = false;
+            }
+        }
+        return value;
+    }
+
+    //% blockId=AlphaBot2_ultrasonic block="Ultrasonic"
     //% weight=80
     export function Ultrasonic(): number {
 
@@ -237,7 +248,7 @@ namespace KitiBot {
         return d / 58;
     }
 
-    //% blockId=kitibot_AnalogRead block="AnalogRead"
+    //% blockId=AlphaBot2_AnalogRead block="AnalogRead"
     //% weight=80 advanced=true
     export function AnalogRead(): number[] {
         if (!initialized) {
@@ -278,7 +289,7 @@ namespace KitiBot {
         return sensor_values;
     }
 
-    //% blockId=kitibot_SensorCalibrated block="SensorCalibrated"
+    //% blockId=AlphaBot2_SensorCalibrated block="SensorCalibrated"
     //% weight=70 
     export function SensorCalibrated(): void {
         let i = 0;
@@ -328,13 +339,13 @@ namespace KitiBot {
 
         Run(Dir.stop, 0);
     }
-    //% blockId=kitibot_ReadSensorMax block="ReadSensorMax"
+    //% blockId=AlphaBot2_ReadSensorMax block="ReadSensorMax"
     //% weight=60 advanced=true
     export function ReadSensorMax(): number[] {
         return calibratedMax;
     }
 
-    //% blockId=kitibot_ReadSensorMin block="ReadSensorMin"
+    //% blockId=AlphaBot2_ReadSensorMin block="ReadSensorMin"
     //% weight=50 advanced=true
     export function ReadSensorMin(): number[] {
         return calibratedMin;
@@ -345,7 +356,7 @@ namespace KitiBot {
     // corresponds to the maximum value.  Calibration values are
     // stored separately for each sensor, so that differences in the
     // sensors are accounted for automatically.
-    //% blockId=kitibot_ReadCalibrated block="ReadCalibrated"
+    //% blockId=AlphaBot2_ReadCalibrated block="ReadCalibrated"
     //% weight=70 advanced=true
     export function readCalibrated(): number[] {
         // read the needed values
@@ -363,7 +374,7 @@ namespace KitiBot {
         return sensor_values;
     }
 
-    //% blockId=kitibot_readLine block="ReadLine"
+    //% blockId=AlphaBot2_readLine block="ReadLine"
     //% weight=10
     export function readLine(): number {
 
@@ -408,4 +419,4 @@ namespace KitiBot {
 
         return last_value;
     }
-} 
+}   

@@ -1,6 +1,6 @@
-# KitiBot
+# AlphaBot2
 
-Extension for Waveshare KitiBot
+Extension for Waveshare AlphaBot2
 
 ## License
 
@@ -12,5 +12,5 @@ MIT
 (The metadata above is needed for package search.)
 
 ```package
-KitiBot=github.com/waveshare/pxt-KitiBot
+AlphaBot2=github.com/waveshare/pxt-AlphaBot2
 ```
