@@ -209,7 +209,7 @@ namespace AlphaBot2 {
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function RunDelay(index: Dir, speed: number, time: number): void {
         Run(index, speed);
-        basic.pause(time * 100);
+        basic.pause(time * 1000);
         Run(Dir.stop, 0);
     }
 
@@ -308,14 +308,14 @@ namespace AlphaBot2 {
         for (let i = 0; i < 100; i++)  // make the calibration take about 10 seconds
         {
             if (i < 25 || i >= 75) {
-                Run(Dir.turnLeft, 100)
+                Run(Dir.turnLeft, 70)
             }
             else {
-                Run(Dir.turnRight, 100)
+                Run(Dir.turnRight, 70)
             }
 
             // reads all sensors 100 times
-            for (j = 0; j < 5; j++) {
+            for (j = 0; j < 10; j++) {
                 let sensor_values = AnalogRead();
                 for (k = 0; k < 5; k++) {
                     // set the max we found THIS time
