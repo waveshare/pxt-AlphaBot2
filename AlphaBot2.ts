@@ -315,7 +315,7 @@ namespace AlphaBot2 {
             }
 
             // reads all sensors 100 times
-            for (j = 0; j < 10; j++) {
+            for (j = 0; j < 3; j++) {
                 let sensor_values = AnalogRead();
                 for (k = 0; k < 5; k++) {
                     // set the max we found THIS time
