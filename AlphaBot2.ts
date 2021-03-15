@@ -280,6 +280,11 @@ namespace AlphaBot2 {
                 pins.digitalWritePin(DigitalPin.P13, 1);
                 pins.digitalWritePin(DigitalPin.P13, 0);
             }
+	    for (j = 0; j < 6; j++) {
+                pins.digitalWritePin(DigitalPin.P13, 1);
+                pins.digitalWritePin(DigitalPin.P13, 0);
+		
+            }
         }
         //pins.digitalWritePin(DigitalPin.P16, 1);
         setPwm(0, 0, 4095);
