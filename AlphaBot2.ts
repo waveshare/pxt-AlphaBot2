@@ -260,10 +260,11 @@ namespace AlphaBot2 {
         let values = [0, 0, 0, 0, 0, 0];
         let sensor_values = [0, 0, 0, 0, 0];
         //pins.digitalWritePin(DigitalPin.P16, 0);
-        setPwm(0, 0, 0);
-        basic.pause(2);
+        
         for (i = 0; i < 6; i++) {
-            for (j = 0; j < 10; j++) {
+            setPwm(0, 0, 0);
+            basic.pause(2);
+            for (j = 0; j < 8; j++) {
                 //0 to 4 clock transfer channel address
                 if (j < 4) {
                     if ((i >> (3 - j)) & 0x01) {
@@ -272,6 +273,8 @@ namespace AlphaBot2 {
                         pins.digitalWritePin(DigitalPin.P15, 0);
                     }
                 }
+                else 
+                    pins.digitalWritePin(DigitalPin.P15, 0);
                 //0 to 10 clock receives the previous conversion result
                 values[i] <<= 1;
                 if (pins.digitalReadPin(DigitalPin.P14)) {
@@ -280,16 +283,25 @@ namespace AlphaBot2 {
                 pins.digitalWritePin(DigitalPin.P13, 1);
                 pins.digitalWritePin(DigitalPin.P13, 0);
             }
-	    for (j = 0; j < 6; j++) {
+	    for (j = 0; j < 4; j++) {
+                values[i] <<= 1;
+                if (pins.digitalReadPin(DigitalPin.P14)) {
+                    values[i] |= 0x01;
+                }
                 pins.digitalWritePin(DigitalPin.P13, 1);
                 pins.digitalWritePin(DigitalPin.P13, 0);
 		
             }
+            setPwm(0, 0, 4095);
         }
+        
         //pins.digitalWritePin(DigitalPin.P16, 1);
-        setPwm(0, 0, 4095);
+        
+        for (i = 0; i < 6; i++) {
+            values[i] = values[i] >>  2;
+        }
         for (i = 0; i < 5; i++) {
-            sensor_values[i] = values[i + 1];
+            sensor_values[i] = values[i + 1] ;
         }
         return sensor_values;
     }
@@ -313,14 +325,14 @@ namespace AlphaBot2 {
         for (let i = 0; i < 100; i++)  // make the calibration take about 10 seconds
         {
             if (i < 25 || i >= 75) {
-                Run(Dir.turnLeft, 70)
+                Run(Dir.turnLeft, 50)
             }
             else {
-                Run(Dir.turnRight, 70)
+                Run(Dir.turnRight, 50)
             }
 
             // reads all sensors 100 times
-            for (j = 0; j < 10; j++) {
+            for (j = 0; j < 5; j++) {
                 let sensor_values = AnalogRead();
                 for (k = 0; k < 5; k++) {
                     // set the max we found THIS time
